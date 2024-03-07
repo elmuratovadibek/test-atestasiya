@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+Test: {{checktest.test.title}}
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3> Test: {{checktest.test.title}} </h3>
+        </div>
+        <div class="card-body">
+            {% if checktest.is_passed %}
+                <h5> Siz usi test jaqsi ottiniz </h5>
+                <p> Siz testti {{checktest.percentage}} %  islediniz. </p>
+            {% else %}
+                <h5> Siz bul tetstten ote almadiniz: {{checktest.percentage}} % </h5>
+                <p> Testden otiw ushin keminde {{checktest.test.pass_percentage}} % toplawiniz kerek.</p>
+            {% endif %}
+
+            <hr>
+            {% for q in checktest.checkquestions_set.all%}
+                {% if q.is_true %}
+                <h5> {{forloop.counter}}. {{q.question.question}}</h5>
+                <small><strong>Note: {{q.given_answer}} belgilengen.</strong> </small>
+                <p>A. {{q.question.answer_a}}</p>
+                <p>B. {{q.question.answer_b}}</p>
+                <p>C. {{q.question.answer_c}}</p>
+                <p>D. {{q.question.answer_d}}</p>
+                {% else %}
+                <div class="answer p-2" style="background-color: rgba(255, 41, 41, 0.472); border-radius: 5px;">
+                    <h5> {{forloop.counter}}. {{q.question.question}}</h5>
+                    <small>  </small>
+                    <p>A. {{q.question.answer_a}}</p>
+                    <p>B. {{q.question.answer_b}}</p>
+                    <p>C. {{q.question.answer_c}}</p>
+                    <p>D. {{q.question.answer_d}}</p>
+                </div>
+                {% endif %}
+                <hr>
+            {% endfor %}
+        <a href="/" class="btn btn-warning" >Izge qaytiw</a>
+        <a href="{% url 'my_results' %}" class="btn btn-secondary" >Menin natiyjelerim</a>
+        </div>
+    </div>
+    <br><br>
+ 
+{% endblock content %}

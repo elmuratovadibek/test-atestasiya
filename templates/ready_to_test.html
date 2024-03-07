@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+   Testni Baslaw - {{test.title}}
+{% endblock title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Testi baslaw - {{test.title}}</h3>
+        </div>
+        <div class="card-body">
+           <p> Kategoriya: {{test.category}} </p>
+           <p> Boslaniw waqti: {{test.start_date}} </p>
+           <p> Tamamlaniw waqti: {{test.end_date}} </p>
+           <p> Maksimum hareketler: {{test.maximum_attemps}} </p>
+           <p> Sorawlar sani: {{test.questions.all.count}} </p>
+           <p> Avtor: <a href="{% url 'profile' test.author.username %}">{{test.author.username}}</a> </p>
+
+           <a href="{% url 'test' test.id %}" class="btn btn-primary" >Testti baslaw</a>
+           <a href="/" class="btn btn-warning" > Qaytiw </a>
+        </div>
+    </div>
+ 
+{% endblock content %}
